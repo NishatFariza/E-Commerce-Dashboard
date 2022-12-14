@@ -1,3 +1,10 @@
 /* @tailwind base; */
 @tailwind components;
 @tailwind utilities;
+
+
+.wrapper{
+    max-width: 1180px;
+    @apply px-3 mx-auto lg:p-0;
+}
+
