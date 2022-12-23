@@ -1,4 +1,5 @@
-import { Navbar, Text } from '@mantine/core';
+import { Navbar, NavLink, Text } from '@mantine/core';
+import { IconShoppingBag, IconCategory, IconUsers } from "@tabler/icons";
 import React from 'react'
 
 
@@ -13,7 +14,11 @@ const AdminMenu: React.FC<Prop> = ({opened}) => {
       hidden={!opened}
       width={{ sm: 200, lg: 300 }}
     >
-      <p>Admin Menu</p>
+          <Navbar.Section mt="xs">
+              <NavLink label="Products" icon={<IconShoppingBag/> } />
+              <NavLink label="Categories" icon={ <IconCategory/>} />
+              <NavLink label="Customers" icon={ <IconUsers/>} />
+      </Navbar.Section>
     </Navbar>
   );
 }
