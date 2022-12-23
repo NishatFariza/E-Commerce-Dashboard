@@ -1,11 +1,12 @@
+import AdminLayout from '@/components/AdminLayout';
 import { Button } from '@mantine/core';
 
 
 export default function Home() {
   return (
-    <div className="wrapper">
+    <AdminLayout>
       <h1>Hello</h1>
       <Button className='bg-indigo-500'>Indego</Button>
-    </div>
+    </AdminLayout>
   );
 }

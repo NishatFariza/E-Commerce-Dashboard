@@ -10,8 +10,9 @@ import {
   Burger,
   useMantineTheme,
 } from "@mantine/core";
+import AdminMenu from "./admin-components/AdminMenu";
 
-const AdminLayout: React.FC<PropsWithChildren> = ({children}) => {
+const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   return (
@@ -26,28 +27,7 @@ const AdminLayout: React.FC<PropsWithChildren> = ({children}) => {
       }}
       navbarOffsetBreakpoint="sm"
       asideOffsetBreakpoint="sm"
-      navbar={
-        <Navbar
-          p="md"
-          hiddenBreakpoint="sm"
-          hidden={!opened}
-          width={{ sm: 200, lg: 300 }}
-        >
-          <Text>Application navbar</Text>
-        </Navbar>
-      }
-      aside={
-        <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-          <Aside p="md" hiddenBreakpoint="sm" width={{ sm: 200, lg: 300 }}>
-            <Text>Application sidebar</Text>
-          </Aside>
-        </MediaQuery>
-      }
-      footer={
-        <Footer height={60} p="md">
-          Application footer
-        </Footer>
-      }
+      navbar={<AdminMenu opened={opened} />}
       header={
         <Header height={{ base: 50, md: 70 }} p="md">
           <div
@@ -71,7 +51,6 @@ const AdminLayout: React.FC<PropsWithChildren> = ({children}) => {
       {children}
     </AppShell>
   );
-}
-
+};
 
 export default AdminLayout;
