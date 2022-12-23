@@ -1,12 +1,11 @@
-import { Navbar, NavLink, Text } from '@mantine/core';
+import { Navbar, NavLink, Text } from "@mantine/core";
 import { IconShoppingBag, IconCategory, IconUsers } from "@tabler/icons";
-import React from 'react'
+import React from "react";
 
-
-interface Prop{
-    opened: boolean;
+interface Prop {
+  opened: boolean;
 }
-const AdminMenu: React.FC<Prop> = ({opened}) => {
+const AdminMenu: React.FC<Prop> = ({ opened }) => {
   return (
     <Navbar
       p="md"
@@ -14,13 +13,13 @@ const AdminMenu: React.FC<Prop> = ({opened}) => {
       hidden={!opened}
       width={{ sm: 200, lg: 300 }}
     >
-          <Navbar.Section mt="xs">
-              <NavLink label="Products" icon={<IconShoppingBag/> } />
-              <NavLink label="Categories" icon={ <IconCategory/>} />
-              <NavLink label="Customers" icon={ <IconUsers/>} />
+      <Navbar.Section mt="xs">
+        <NavLink label="Products" icon={<IconShoppingBag />} />
+        <NavLink label="Categories" icon={<IconCategory />} />
+        <NavLink label="Customers" icon={<IconUsers />} />
       </Navbar.Section>
     </Navbar>
   );
-}
+};
 
-export default AdminMenu
+export default AdminMenu;

@@ -1,4 +1,5 @@
 import { PropsWithChildren, useState } from "react";
+
 import {
   AppShell,
   Navbar,
@@ -9,8 +10,13 @@ import {
   MediaQuery,
   Burger,
   useMantineTheme,
+  Title,
+  Avatar,
+  Menu,
+  Button,
 } from "@mantine/core";
 import AdminMenu from "./admin-components/AdminMenu";
+import HeaderUserMenu from "./HeaderUserMenu";
 
 const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
   const theme = useMantineTheme();
@@ -30,9 +36,7 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
       navbar={<AdminMenu opened={opened} />}
       header={
         <Header height={{ base: 50, md: 70 }} p="md">
-          <div
-            style={{ display: "flex", alignItems: "center", height: "100%" }}
-          >
+          <div className="flex items-center justify-between h-full">
             <MediaQuery largerThan="sm" styles={{ display: "none" }}>
               <Burger
                 opened={opened}
@@ -43,7 +47,9 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
               />
             </MediaQuery>
 
-            <Text>Application header</Text>
+            <Title order={3}>Dashboard</Title>
+            <HeaderUserMenu />
+
           </div>
         </Header>
       }
