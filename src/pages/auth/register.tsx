@@ -1,6 +1,7 @@
 import { Anchor, Button, Input, Paper, Space, Title } from "@mantine/core";
 
 import { IconLock, IconMail } from "@tabler/icons";
+import Link from "next/link";
 
 const RegisterPage = () => {
   return (
@@ -23,10 +24,17 @@ const RegisterPage = () => {
               />
             </Input.Wrapper>
             <Space h={"sm"} />
-            <Button> Login</Button>
+            <Button>Register</Button>
           </form>
           <Space h={"sm"} />
-          <Anchor>Don't have an account? Register Now</Anchor>
+          <Anchor
+            size={"sm"}
+            color={"gray.6"}
+            component={Link}
+            href={"/auth/login"}
+          >
+            Already have an account? Login Now
+          </Anchor>
         </Paper>
       </div>
     </div>
