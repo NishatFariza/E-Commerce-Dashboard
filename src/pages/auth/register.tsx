@@ -1,15 +1,15 @@
-import { Button, Input, Paper, Space, Title } from "@mantine/core";
+import { Anchor, Button, Input, Paper, Space, Title } from "@mantine/core";
 
 import { IconLock, IconMail } from "@tabler/icons";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   return (
     <div className="bg-slate-100 h-screen">
       <div className="max-w-md mx-auto py-20">
         <Paper shadow="lg" radius="md" p="md">
           <form action="#">
             <Title order={4} color={"dark.3"}>
-              Access To Your Account
+              Graph a New Account
             </Title>
             <Space h={"md"} />
             <Input.Wrapper withAsterisk label="Email">
@@ -25,10 +25,12 @@ const LoginPage = () => {
             <Space h={"sm"} />
             <Button> Login</Button>
           </form>
+          <Space h={"sm"} />
+          <Anchor>Don't have an account? Register Now</Anchor>
         </Paper>
       </div>
     </div>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
