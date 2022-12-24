@@ -2,18 +2,11 @@ import { PropsWithChildren, useState } from "react";
 
 import {
   AppShell,
-  Navbar,
-  Header,
-  Footer,
-  Aside,
-  Text,
-  MediaQuery,
   Burger,
-  useMantineTheme,
+  Header,
+  MediaQuery,
   Title,
-  Avatar,
-  Menu,
-  Button,
+  useMantineTheme,
 } from "@mantine/core";
 import AdminMenu from "./admin-components/AdminMenu";
 import HeaderUserMenu from "./HeaderUserMenu";
@@ -49,7 +42,6 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
 
             <Title order={3}>Dashboard</Title>
             <HeaderUserMenu />
-
           </div>
         </Header>
       }

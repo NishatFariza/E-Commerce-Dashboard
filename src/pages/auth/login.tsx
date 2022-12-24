@@ -1,4 +1,4 @@
-import { Paper, Text } from "@mantine/core";
+import { Input, Paper, Text } from "@mantine/core";
 import React from "react";
 
 const LoginPage = () => {
@@ -7,10 +7,17 @@ const LoginPage = () => {
       <div className="max-w-md mx-auto py-20">
         <Paper shadow="lg" radius="md" p="md">
           <Text>Paper is the most basic ui component</Text>
-          <Text>
-            Use it to create cards, dropdowns, modals and other components that
-            require background with shadow
-          </Text>
+          <form action="#">
+            <Input.Wrapper
+              id="input-demo"
+              withAsterisk
+              label="Credit card information"
+              description="Please enter your credit card information, we need some money"
+              error="Your credit card expired"
+            >
+              <Input id="input-demo" placeholder="Your email" />
+            </Input.Wrapper>
+          </form>
         </Paper>
       </div>
     </div>
