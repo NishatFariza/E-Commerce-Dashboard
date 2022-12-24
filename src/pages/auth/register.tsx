@@ -1,6 +1,6 @@
 import { Anchor, Button, Input, Paper, Space, Title } from "@mantine/core";
 
-import { IconLock, IconMail } from "@tabler/icons";
+import { IconLock, IconMail, IconUser } from "@tabler/icons";
 import Link from "next/link";
 
 const RegisterPage = () => {
@@ -13,6 +13,10 @@ const RegisterPage = () => {
               Graph a New Account
             </Title>
             <Space h={"md"} />
+            <Input.Wrapper withAsterisk label="Name">
+              <Input icon={<IconUser size={16} />} placeholder="Your name" />
+            </Input.Wrapper>
+            <Space h={"sm"} />
             <Input.Wrapper withAsterisk label="Email">
               <Input icon={<IconMail size={16} />} placeholder="Your email" />
             </Input.Wrapper>
@@ -21,6 +25,13 @@ const RegisterPage = () => {
               <Input
                 icon={<IconLock size={16} />}
                 placeholder="Enter your password"
+              />
+            </Input.Wrapper>
+            <Space h={"sm"} />
+            <Input.Wrapper withAsterisk label="Confirm password">
+              <Input
+                icon={<IconLock size={16} />}
+                placeholder="Confirm your password"
               />
             </Input.Wrapper>
             <Space h={"sm"} />
