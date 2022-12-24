@@ -38,7 +38,7 @@ const RegisterPage = () => {
             <Button>Register</Button>
           </form>
           <Space h={"sm"} />
-          <Anchor
+          <Anchor 
             size={"sm"}
             color={"gray.6"}
             component={Link}
