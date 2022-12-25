@@ -6,74 +6,54 @@ import Link from "next/link";
 // import { yupResolver } from "@hookform/resolvers/yup";
 import { ErrorMessage } from "@hookform/error-message";
 import { useForm, yupResolver } from "@mantine/form";
+import { Formik } from "formik";
 
-const validationSchema = yup.object({
+const schema = yup.object({
   email: yup.string().required("Required").email("Invalid Email"),
   password: yup.string().required().min(6).max(30),
 });
 
 const LoginPage = () => {
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   watch,
-  //   formState: { errors },
-  // } = useForm({
-  //   resolver: yupResolver(validationSchema),
-  //   defaultValues: {
-  //     email: "Nisat",
-  //     password: "pass",
-  //   },
-  // });
-
-  const { errors, getInputProps, onSubmit } = useForm({
-    validate: yupResolver(validationSchema),
-    initialValues: {
-      email: "nisat",
-      password: "abc",
-    },
-  });
-
-  const handleSubmitForm = (values: any) => {
-    console.log(values);
-    //root: api call
-  };
+  const handleSubmit = (values: any) => {};
 
   return (
     <div className="bg-slate-100 h-screen">
       <div className="max-w-md mx-auto py-20">
         <Paper shadow="lg" radius="md" p="md">
-          <form action="#" onSubmit={onSubmit(handleSubmitForm)}>
-            <pre>{JSON.stringify({ error: errors?.email }, null, 2)}</pre>
-            <pre>{JSON.stringify({ error: errors?.password }, null, 2)}</pre>
+          <Formik
+            initialValues={{ email: "", password: "" }}
+            validationSchema={schema}
+            onSubmit={handleSubmit}
+          >
+            {() => (
+              <form action="#">
+                {/* <pre>{JSON.stringify({ error: errors?.email }, null, 2)}</pre>
+            <pre>{JSON.stringify({ error: errors?.password }, null, 2)}</pre> */}
 
-            <Title order={4} color={"dark.3"}>
-              Access To Your Account
-            </Title>
-            <Space h={"md"} />
-            <Input.Wrapper withAsterisk label="Email" error={errors.email}>
-              <Input
-                icon={<IconMail size={16} />}
-                placeholder="Your email"
-                {...getInputProps("email")}
-              />
-            </Input.Wrapper>
-            <Space h={"sm"} />
-            <Input.Wrapper
-              withAsterisk
-              label="Password"
-              error={errors.password}
-            >
-              <Input
-                type={"password"}
-                icon={<IconLock size={16} />}
-                placeholder="Enter your password"
-                {...getInputProps("password")}
-              />
-            </Input.Wrapper>
-            <Space h={"sm"} />
-            <Button type="submit"> Login</Button>
-          </form>
+                <Title order={4} color={"dark.3"}>
+                  Access To Your Account
+                </Title>
+                <Space h={"md"} />
+                <Input.Wrapper withAsterisk label="Email">
+                  <Input
+                    icon={<IconMail size={16} />}
+                    placeholder="Your email"
+                  />
+                </Input.Wrapper>
+                <Space h={"sm"} />
+                <Input.Wrapper withAsterisk label="Password">
+                  <Input
+                    type={"password"}
+                    icon={<IconLock size={16} />}
+                    placeholder="Enter your password"
+                  />
+                </Input.Wrapper>
+                <Space h={"sm"} />
+                <Button type="submit"> Login</Button>
+              </form>
+            )}
+          </Formik>
+
           <Space h={"sm"} />
           <Anchor
             size={"sm"}
