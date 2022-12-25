@@ -4,6 +4,7 @@ import { IconLock, IconMail } from "@tabler/icons";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { ErrorMessage } from "@hookform/error-message";
 
 const validationSchema = yup.object({
   email: yup.string().required("Required").email("Invalid Email"),
@@ -50,7 +51,7 @@ const LoginPage = () => {
             <Input.Wrapper
               withAsterisk
               label="Email"
-              error={errors?.email?.message}
+              error={<ErrorMessage errors={errors} name={"email"} />}
             >
               <Input
                 icon={<IconMail size={16} />}
@@ -62,7 +63,7 @@ const LoginPage = () => {
             <Input.Wrapper
               withAsterisk
               label="Password"
-              error={errors?.password?.message}
+              error={<ErrorMessage errors={errors} name={"password"} />}
             >
               <Input
                 type={"password"}
