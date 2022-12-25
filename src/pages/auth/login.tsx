@@ -2,9 +2,10 @@ import * as yup from "yup";
 import { Anchor, Button, Input, Paper, Space, Title } from "@mantine/core";
 import { IconLock, IconMail } from "@tabler/icons";
 import Link from "next/link";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+// import { useForm } from "react-hook-form";
+// import { yupResolver } from "@hookform/resolvers/yup";
 import { ErrorMessage } from "@hookform/error-message";
+import { useForm, yupResolver } from "@mantine/form";
 
 const validationSchema = yup.object({
   email: yup.string().required("Required").email("Invalid Email"),
@@ -12,16 +13,24 @@ const validationSchema = yup.object({
 });
 
 const LoginPage = () => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(validationSchema),
-    defaultValues: {
-      email: "Nisat",
-      password: "pass",
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   watch,
+  //   formState: { errors },
+  // } = useForm({
+  //   resolver: yupResolver(validationSchema),
+  //   defaultValues: {
+  //     email: "Nisat",
+  //     password: "pass",
+  //   },
+  // });
+
+  const { errors, getInputProps, onSubmit } = useForm({
+    validate: yupResolver(validationSchema),
+    initialValues: {
+      email: "nisat",
+      password: "abc",
     },
   });
 
@@ -34,42 +43,32 @@ const LoginPage = () => {
     <div className="bg-slate-100 h-screen">
       <div className="max-w-md mx-auto py-20">
         <Paper shadow="lg" radius="md" p="md">
-          <form action="#" onSubmit={handleSubmit(handleSubmitForm)}>
-            <pre>{JSON.stringify(watch("email"), null, 2)}</pre>
-            <pre>{JSON.stringify(watch("password"), null, 2)}</pre>
-            <pre>
-              {JSON.stringify({ error: errors?.email?.message }, null, 2)}
-            </pre>
-            <pre>
-              {JSON.stringify({ error: errors?.password?.message }, null, 2)}
-            </pre>
+          <form action="#" onSubmit={onSubmit(handleSubmitForm)}>
+            <pre>{JSON.stringify({ error: errors?.email }, null, 2)}</pre>
+            <pre>{JSON.stringify({ error: errors?.password }, null, 2)}</pre>
 
             <Title order={4} color={"dark.3"}>
               Access To Your Account
             </Title>
             <Space h={"md"} />
-            <Input.Wrapper
-              withAsterisk
-              label="Email"
-              error={<ErrorMessage errors={errors} name={"email"} />}
-            >
+            <Input.Wrapper withAsterisk label="Email" error={errors.email}>
               <Input
                 icon={<IconMail size={16} />}
                 placeholder="Your email"
-                {...register("email")}
+                {...getInputProps("email")}
               />
             </Input.Wrapper>
             <Space h={"sm"} />
             <Input.Wrapper
               withAsterisk
               label="Password"
-              error={<ErrorMessage errors={errors} name={"password"} />}
+              error={errors.password}
             >
               <Input
                 type={"password"}
                 icon={<IconLock size={16} />}
                 placeholder="Enter your password"
-                {...register("password")}
+                {...getInputProps("password")}
               />
             </Input.Wrapper>
             <Space h={"sm"} />
