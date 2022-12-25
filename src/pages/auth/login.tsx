@@ -6,7 +6,7 @@ import Link from "next/link";
 // import { yupResolver } from "@hookform/resolvers/yup";
 import { ErrorMessage } from "@hookform/error-message";
 import { useForm, yupResolver } from "@mantine/form";
-import { Formik } from "formik";
+import { Formik, useFormik } from "formik";
 
 const schema = yup.object({
   email: yup.string().required("Required").email("Invalid Email"),
@@ -14,45 +14,58 @@ const schema = yup.object({
 });
 
 const LoginPage = () => {
-  const handleSubmit = (values: any) => {};
+  const handleFormSubmit = (values: any) => {
+    console.log(values);
+    //root: api call
+  };
+
+  const { handleBlur, handleSubmit, handleChange, errors, values } = useFormik({
+    initialValues: { email: "", password: "" },
+    validationSchema: schema,
+    onSubmit: handleFormSubmit,
+  });
 
   return (
     <div className="bg-slate-100 h-screen">
       <div className="max-w-md mx-auto py-20">
         <Paper shadow="lg" radius="md" p="md">
-          <Formik
-            initialValues={{ email: "", password: "" }}
-            validationSchema={schema}
-            onSubmit={handleSubmit}
-          >
-            {() => (
-              <form action="#">
-                {/* <pre>{JSON.stringify({ error: errors?.email }, null, 2)}</pre>
-            <pre>{JSON.stringify({ error: errors?.password }, null, 2)}</pre> */}
+          <form action="#" onSubmit={handleSubmit}>
+            {/* <pre>{JSON.stringify(values, null, 2)}</pre>
+            <pre>{JSON.stringify(errors, null, 2)}</pre> */}
 
-                <Title order={4} color={"dark.3"}>
-                  Access To Your Account
-                </Title>
-                <Space h={"md"} />
-                <Input.Wrapper withAsterisk label="Email">
-                  <Input
-                    icon={<IconMail size={16} />}
-                    placeholder="Your email"
-                  />
-                </Input.Wrapper>
-                <Space h={"sm"} />
-                <Input.Wrapper withAsterisk label="Password">
-                  <Input
-                    type={"password"}
-                    icon={<IconLock size={16} />}
-                    placeholder="Enter your password"
-                  />
-                </Input.Wrapper>
-                <Space h={"sm"} />
-                <Button type="submit"> Login</Button>
-              </form>
-            )}
-          </Formik>
+            <Title order={4} color={"dark.3"}>
+              Access To Your Account
+            </Title>
+            <Space h={"md"} />
+            <Input.Wrapper withAsterisk label="Email" error={errors.email}>
+              <Input
+                name={"email"}
+                onChange={handleChange}
+                value={values.email}
+                onBlur={handleBlur}
+                icon={<IconMail size={16} />}
+                placeholder="Your email"
+              />
+            </Input.Wrapper>
+            <Space h={"sm"} />
+            <Input.Wrapper
+              withAsterisk
+              label="Password"
+              error={errors.password}
+            >
+              <Input
+                name={"password"}
+                onChange={handleChange}
+                value={values.password}
+                onBlur={handleBlur}
+                type={"password"}
+                icon={<IconLock size={16} />}
+                placeholder="Enter your password"
+              />
+            </Input.Wrapper>
+            <Space h={"sm"} />
+            <Button type="submit"> Login</Button>
+          </form>
 
           <Space h={"sm"} />
           <Anchor
