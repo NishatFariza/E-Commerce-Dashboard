@@ -1,12 +1,8 @@
-import * as yup from "yup";
 import { Anchor, Button, Input, Paper, Space, Title } from "@mantine/core";
 import { IconLock, IconMail } from "@tabler/icons";
 import Link from "next/link";
-// import { useForm } from "react-hook-form";
-// import { yupResolver } from "@hookform/resolvers/yup";
-import { ErrorMessage } from "@hookform/error-message";
-import { useForm, yupResolver } from "@mantine/form";
-import { Formik, useFormik } from "formik";
+import * as yup from "yup";
+import { useFormik } from "formik";
 
 const schema = yup.object({
   email: yup.string().required("Required").email("Invalid Email"),
@@ -19,7 +15,7 @@ const LoginPage = () => {
     //root: api call
   };
 
-  const { handleBlur, handleSubmit, handleChange, errors, values } = useFormik({
+const { handleBlur, handleSubmit, handleChange, errors, values } = useFormik({
     initialValues: { email: "", password: "" },
     validationSchema: schema,
     onSubmit: handleFormSubmit,
