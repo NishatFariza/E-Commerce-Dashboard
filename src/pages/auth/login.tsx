@@ -2,14 +2,18 @@ import { Anchor, Button, Input, Paper, Space, Title } from "@mantine/core";
 
 import { IconLock, IconMail } from "@tabler/icons";
 import Link from "next/link";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { register, handleSubmit, setValue, watch } = useForm({
+    defaultValues: {
+      email: "Nisat",
+      password: "pass",
+    },
+  });
 
   const handleSubmitForm = () => {
-    console.log({ email, password });
+    // console.log({ email, password });
   };
 
   return (
@@ -17,7 +21,8 @@ const LoginPage = () => {
       <div className="max-w-md mx-auto py-20">
         <Paper shadow="lg" radius="md" p="md">
           <form action="#" onSubmit={handleSubmitForm}>
-            <pre>{JSON.stringify({ email, password }, null, 2)}</pre>
+            <pre>{JSON.stringify(watch("email"), null, 2)}</pre>
+            <pre>{JSON.stringify(watch("password"), null, 2)}</pre>
 
             <Title order={4} color={"dark.3"}>
               Access To Your Account
@@ -27,7 +32,8 @@ const LoginPage = () => {
               <Input
                 required
                 type={"email"}
-                onChange={(e) => setEmail(e.target.value)}
+                value={watch("email")}
+                onChange={(e) => setValue("email", e.target.value)}
                 icon={<IconMail size={16} />}
                 placeholder="Your email"
               />
@@ -35,9 +41,10 @@ const LoginPage = () => {
             <Space h={"sm"} />
             <Input.Wrapper withAsterisk label="Password">
               <Input
-                type={"password"}
                 required
-                onChange={(e) => setPassword(e.target.value)}
+                type={"password"}
+                value={watch("email")}
+                onChange={(e) => setValue("password", e.target.value)}
                 icon={<IconLock size={16} />}
                 placeholder="Enter your password"
               />
