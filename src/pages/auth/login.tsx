@@ -8,39 +8,8 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [errors, setErrors] = useState({});
-  const [hasErrors, setHasErrors] = useState(false);
-
   const handleSubmitForm = () => {
-    if (!email.includes("@")) {
-      setErrors({
-        ...errors,
-        email: "Invalid Email",
-      });
-      setHasErrors(true)
-    }
-     else if (password.length < 6) {
-      setErrors({
-        ...errors,
-        password: "Password can not be less 6 characters",
-      });
-       setHasErrors(true);
-    }
-    else if (password.length === 0) {
-      setErrors({
-        ...errors,
-        password: "Password is Required",
-      });
-       setHasErrors(true);
-    }
-    else {
-      setHasErrors(false);
-    }
-
-    if (!Object.keys(errors).length) {
-      console.log({ email, password });
-      setErrors({});
-    }
+    console.log({ email, password });
   };
 
   return (
@@ -49,13 +18,15 @@ const LoginPage = () => {
         <Paper shadow="lg" radius="md" p="md">
           <form action="#" onSubmit={handleSubmitForm}>
             <pre>{JSON.stringify({ email, password }, null, 2)}</pre>
-            <pre>{JSON.stringify(errors, null, 2)}</pre>
+
             <Title order={4} color={"dark.3"}>
               Access To Your Account
             </Title>
             <Space h={"md"} />
             <Input.Wrapper withAsterisk label="Email">
               <Input
+                required
+                type={"email"}
                 onChange={(e) => setEmail(e.target.value)}
                 icon={<IconMail size={16} />}
                 placeholder="Your email"
@@ -64,6 +35,8 @@ const LoginPage = () => {
             <Space h={"sm"} />
             <Input.Wrapper withAsterisk label="Password">
               <Input
+                type={"password"}
+                required
                 onChange={(e) => setPassword(e.target.value)}
                 icon={<IconLock size={16} />}
                 placeholder="Enter your password"
