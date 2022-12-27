@@ -1,7 +1,7 @@
+import http from "@/app/api/repositories/http";
 import { Anchor, Button, Input, Paper, Space, Title } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
 import { IconCheck, IconLock, IconMail, IconX } from "@tabler/icons";
-import axios from "axios";
 import { useFormik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -21,7 +21,7 @@ const LoginPage = () => {
     console.log(values);
     //root: api call
     setLoading(true);
-    axios
+    http
       .post("/auth/login", values)
       .then((res) => {
         localStorage.setItem("Token", res.data.data.access_token);

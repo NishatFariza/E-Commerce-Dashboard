@@ -20,15 +20,6 @@ const schema = yup.object({
 const RegisterPage = () => {
   const handleFormSubmit = async (values: any) => {
     console.log(values);
-
-    // const http = await fetch("http://104.251.211.125:8055/auth/login", {
-    //   method: "POST",
-    //   body: JSON.stringify(values),
-    // });
-    // const data = await http.json();
-    // console.log(data);
-
-   
   };
 
   const { handleBlur, handleSubmit, handleChange, errors, values } = useFormik({
