@@ -4,6 +4,8 @@ import Link from "next/link";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import axios from "axios";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 const schema = yup.object({
   email: yup.string().required("Required").email("Invalid Email"),
@@ -11,15 +13,24 @@ const schema = yup.object({
 });
 
 const LoginPage = () => {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
   const handleFormSubmit = (values: any) => {
     console.log(values);
     //root: api call
+    setLoading(true);
     axios
       .post("http://104.251.211.125:8055/auth/login", values)
       .then((res) => {
-        console.log(res);
+        localStorage.setItem("Token", res.data.data.access_token);
+        router.push("/");
+        setLoading(false);
       })
-      .catch((err) => {});
+      .catch((err) => {
+        alert("Failed to login");
+        setLoading(false);
+      });
   };
 
   const { handleBlur, handleSubmit, handleChange, errors, values } = useFormik({
@@ -43,6 +54,7 @@ const LoginPage = () => {
             <Input.Wrapper withAsterisk label="Email" error={errors.email}>
               <Input
                 name={"email"}
+                disabled={loading}
                 onChange={handleChange}
                 value={values.email}
                 onBlur={handleBlur}
@@ -58,6 +70,7 @@ const LoginPage = () => {
             >
               <Input
                 name={"password"}
+                disabled={loading}
                 onChange={handleChange}
                 value={values.password}
                 onBlur={handleBlur}
@@ -67,7 +80,9 @@ const LoginPage = () => {
               />
             </Input.Wrapper>
             <Space h={"sm"} />
-            <Button type="submit"> Login</Button>
+            <Button loading={loading} type="submit">
+              Login
+            </Button>
           </form>
 
           <Space h={"sm"} />
