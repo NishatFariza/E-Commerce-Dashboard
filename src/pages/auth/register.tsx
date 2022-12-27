@@ -28,12 +28,7 @@ const RegisterPage = () => {
     // const data = await http.json();
     // console.log(data);
 
-    axios
-      .post("http://104.251.211.125:8055/auth/login", values)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {});
+   
   };
 
   const { handleBlur, handleSubmit, handleChange, errors, values } = useFormik({

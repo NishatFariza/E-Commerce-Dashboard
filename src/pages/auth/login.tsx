@@ -3,6 +3,7 @@ import { IconLock, IconMail } from "@tabler/icons";
 import Link from "next/link";
 import * as yup from "yup";
 import { useFormik } from "formik";
+import axios from "axios";
 
 const schema = yup.object({
   email: yup.string().required("Required").email("Invalid Email"),
@@ -13,9 +14,15 @@ const LoginPage = () => {
   const handleFormSubmit = (values: any) => {
     console.log(values);
     //root: api call
+    axios
+      .post("http://104.251.211.125:8055/auth/login", values)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {});
   };
 
-const { handleBlur, handleSubmit, handleChange, errors, values } = useFormik({
+  const { handleBlur, handleSubmit, handleChange, errors, values } = useFormik({
     initialValues: { email: "", password: "" },
     validationSchema: schema,
     onSubmit: handleFormSubmit,
