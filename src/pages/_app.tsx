@@ -3,6 +3,10 @@ import Head from "next/head";
 import { MantineProvider } from "@mantine/core";
 import "../styles/globals.css";
 import { NotificationsProvider } from "@mantine/notifications";
+import axios from "axios";
+
+// axios.defaults.baseURL = "http://104.251.211.125:8055";
+
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;

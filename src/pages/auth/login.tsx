@@ -22,7 +22,7 @@ const LoginPage = () => {
     //root: api call
     setLoading(true);
     axios
-      .post("http://104.251.211.125:8055/auth/login", values)
+      .post("/auth/login", values)
       .then((res) => {
         localStorage.setItem("Token", res.data.data.access_token);
         router.push("/");
