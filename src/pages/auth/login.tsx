@@ -1,11 +1,12 @@
 import { Anchor, Button, Input, Paper, Space, Title } from "@mantine/core";
-import { IconLock, IconMail } from "@tabler/icons";
-import Link from "next/link";
-import * as yup from "yup";
-import { useFormik } from "formik";
+import { showNotification } from "@mantine/notifications";
+import { IconCheck, IconLock, IconMail, IconX } from "@tabler/icons";
 import axios from "axios";
+import { useFormik } from "formik";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import * as yup from "yup";
 
 const schema = yup.object({
   email: yup.string().required("Required").email("Invalid Email"),
@@ -26,10 +27,21 @@ const LoginPage = () => {
         localStorage.setItem("Token", res.data.data.access_token);
         router.push("/");
         setLoading(false);
+        showNotification({
+          color: "green",
+          icon: <IconCheck />,
+          title: "Login Success",
+          message: "Welcome to Dashboard",
+        });
       })
       .catch((err) => {
-        alert("Failed to login");
         setLoading(false);
+        showNotification({
+          color: "red",
+          icon: <IconX />,
+          title: "Invalid credentials",
+          message: "Please check your email and password",
+        });
       });
   };
 

@@ -17,6 +17,7 @@
     "@mantine/ds": "^5.9.4",
     "@mantine/hooks": "^5.9.4",
     "@mantine/next": "^5.9.4",
+    "@mantine/notifications": "^5.9.5",
     "@mantine/prism": "^5.9.4",
     "@tabler/icons": "^1.118.0",
     "@types/node": "18.11.15",
