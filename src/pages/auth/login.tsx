@@ -1,12 +1,12 @@
-import http from "@/app/api/repositories/http";
+import authRepo from "@/app/api/repositories/auth.repo";
 import { Anchor, Button, Input, Paper, Space, Title } from "@mantine/core";
-import { showNotification } from "@mantine/notifications";
 import { IconCheck, IconLock, IconMail, IconX } from "@tabler/icons";
 import { useFormik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import * as yup from "yup";
+import { showNotification } from '@mantine/notifications';
 
 const schema = yup.object({
   email: yup.string().required("Required").email("Invalid Email"),
@@ -21,28 +21,50 @@ const LoginPage = () => {
     console.log(values);
     //root: api call
     setLoading(true);
-    http
-      .post("/auth/login", values)
-      .then((res) => {
-        localStorage.setItem("Token", res.data.data.access_token);
-        router.push("/");
-        setLoading(false);
-        showNotification({
-          color: "green",
-          icon: <IconCheck />,
-          title: "Login Success",
-          message: "Welcome to Dashboard",
-        });
-      })
-      .catch((err) => {
-        setLoading(false);
-        showNotification({
-          color: "red",
-          icon: <IconX />,
-          title: "Invalid credentials",
-          message: "Please check your email and password",
-        });
-      });
+
+    authRepo.login(values.email, values.password).then((res) => {
+      localStorage.setItem("Token", res.data.data.access_token);
+          router.push("/");
+          setLoading(false);
+          showNotification({
+            color: "green",
+            icon: <IconCheck />,
+            title: "Login Success",
+            message: "Welcome to Dashboard",
+          });
+        })
+        .catch((err) => {
+          setLoading(false);
+          showNotification({
+            color: "red",
+            icon: <IconX />,
+            title: "Invalid credentials",
+            message: "Please check your email and password",
+          });
+    })
+
+    // http
+    //   .post("/auth/login", values)
+    //   .then((res) => {
+    //     localStorage.setItem("Token", res.data.data.access_token);
+    //     router.push("/");
+    //     setLoading(false);
+    //     showNotification({
+    //       color: "green",
+    //       icon: <IconCheck />,
+    //       title: "Login Success",
+    //       message: "Welcome to Dashboard",
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     setLoading(false);
+    //     showNotification({
+    //       color: "red",
+    //       icon: <IconX />,
+    //       title: "Invalid credentials",
+    //       message: "Please check your email and password",
+    //     });
+    //   });
   };
 
   const { handleBlur, handleSubmit, handleChange, errors, values } = useFormik({
