@@ -4,9 +4,17 @@ import { MantineProvider } from "@mantine/core";
 import "../styles/globals.css";
 import { NotificationsProvider } from "@mantine/notifications";
 import axios from "axios";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 
 // axios.defaults.baseURL = "http://104.251.211.125:8055";
 
+export const queryClient = new QueryClient();
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
@@ -20,20 +28,21 @@ export default function App(props: AppProps) {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-
-      <MantineProvider
-        withGlobalStyles
-        withNormalizeCSS
-        theme={{
-          /** Put your mantine theme override here */
-          colorScheme: "light",
-          primaryColor: "cyan",
-        }}
-      >
-        <NotificationsProvider position="top-right">
-          <Component {...pageProps} />
-        </NotificationsProvider>
-      </MantineProvider>
+      <QueryClientProvider client={queryClient}>
+        <MantineProvider
+          withGlobalStyles
+          withNormalizeCSS
+          theme={{
+            /** Put your mantine theme override here */
+            colorScheme: "light",
+            primaryColor: "cyan",
+          }}
+        >
+          <NotificationsProvider position="top-right">
+            <Component {...pageProps} />
+          </NotificationsProvider>
+        </MantineProvider>
+      </QueryClientProvider>
     </>
   );
 }

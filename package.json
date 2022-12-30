@@ -20,6 +20,7 @@
     "@mantine/notifications": "^5.9.5",
     "@mantine/prism": "^5.9.4",
     "@tabler/icons": "^1.118.0",
+    "@tanstack/react-query": "^4.20.4",
     "@types/node": "18.11.15",
     "@types/react": "18.0.26",
     "@types/react-dom": "18.0.9",

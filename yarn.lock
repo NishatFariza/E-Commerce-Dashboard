@@ -472,6 +472,19 @@
   resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-1.118.0.tgz#8bbda4e7e3c78e4919be6794940b37c7142f223b"
   integrity sha512-/DFANTIQBz+Moissilo47WPOp598Ht4gxvAtK0f/OC5eL8bjzxbzd4dx7d1uwf1oQ/PvaQ3Sh2UhXKP0I1D1wg==
 
+"@tanstack/query-core@4.20.4":
+  version "4.20.4"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.20.4.tgz#1f7975a2db26a8bc2f382bad8a44cd422c846b17"
+  integrity sha512-lhLtGVNJDsJ/DyZXrLzekDEywQqRVykgBqTmkv0La32a/RleILXy6JMLBb7UmS3QCatg/F/0N9/5b0i5j6IKcA==
+
+"@tanstack/react-query@^4.20.4":
+  version "4.20.4"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.20.4.tgz#562b34fb919adea884eccaba2b5be50e8ba7fb16"
+  integrity sha512-SJRxx13k/csb9lXAJfycgVA1N/yU/h3bvRNWP0+aHMfMjmbyX82FdoAcckDBbOdEyAupvb0byelNHNeypCFSyA==
+  dependencies:
+    "@tanstack/query-core" "4.20.4"
+    use-sync-external-store "^1.2.0"
+
 "@types/lodash@^4.14.175":
   version "4.14.191"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.191.tgz#09511e7f7cba275acd8b419ddac8da9a6a79e2fa"
@@ -1629,6 +1642,11 @@ use-latest@^1.2.1:
   integrity sha512-xA+AVm/Wlg3e2P/JiItTziwS7FK92LWrDB0p+hgXloIMuVCeJJ8v6f0eeHyPZaJrM+usM1FkFfbNCrJGs8A/zw==
   dependencies:
     use-isomorphic-layout-effect "^1.1.1"
+
+use-sync-external-store@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz#7dbefd6ef3fe4e767a0cf5d7287aacfb5846928a"
+  integrity sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==
 
 util-deprecate@^1.0.2, util-deprecate@~1.0.1:
   version "1.0.2"
