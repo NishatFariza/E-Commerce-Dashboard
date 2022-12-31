@@ -13,6 +13,10 @@ class AuthApiRepo{
         return this.http.post("/auth/login", payLoad)
     }
 
+    me = () => {
+        return this.http.get("/users/me")
+    }
+
 }
 
 export interface LoginPayload {

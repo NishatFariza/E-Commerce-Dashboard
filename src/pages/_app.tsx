@@ -11,6 +11,8 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 // axios.defaults.baseURL = "http://104.251.211.125:8055";
 
@@ -18,6 +20,15 @@ export const queryClient = new QueryClient();
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/auth/login")
+    }
+  }, []);
 
   return (
     <>
