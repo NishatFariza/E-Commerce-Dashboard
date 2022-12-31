@@ -9,10 +9,15 @@ class AuthApiRepo{
         this.http = http
     }
     
-    login = (email: string, password: string) => {
-        return this.http.post("/auth/login", {email, password })
+    login = (payLoad: LoginPayload) => {
+        return this.http.post("/auth/login", payLoad)
     }
 
+}
+
+export interface LoginPayload {
+    email: string,
+    password: string,
 }
 
 

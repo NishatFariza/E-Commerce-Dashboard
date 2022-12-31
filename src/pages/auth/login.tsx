@@ -1,12 +1,13 @@
-import authRepo from "@/app/api/repositories/auth.repo";
+import { LoginPayload } from "@/app/api/repositories/auth.repo";
+import http from "@/app/api/repositories/http";
 import { Anchor, Button, Input, Paper, Space, Title } from "@mantine/core";
+import { showNotification } from "@mantine/notifications";
 import { IconCheck, IconLock, IconMail, IconX } from "@tabler/icons";
+import { useMutation } from "@tanstack/react-query";
 import { useFormik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import * as yup from "yup";
-import { showNotification } from '@mantine/notifications';
 
 const schema = yup.object({
   email: yup.string().required("Required").email("Invalid Email"),
@@ -15,56 +16,38 @@ const schema = yup.object({
 
 const LoginPage = () => {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+
+  const { isLoading, mutate, data } = useMutation(
+    (payload: LoginPayload) => {
+      return http.post("/auth/login", payload);
+    },
+    {
+      onSuccess: (res) => {
+        localStorage.setItem("Token", res.data.data.access_token);
+        router.push("/");
+        showNotification({
+          color: "green",
+          icon: <IconCheck />,
+          title: "Login Success",
+          message: "Welcome to Dashboard",
+        });
+      },
+      onError: (err) => {
+        showNotification({
+          color: "red",
+          icon: <IconX />,
+          title: "Invalid credentials",
+          message: "Please check your email and password",
+        });
+      },
+    }
+  );
 
   const handleFormSubmit = (values: any) => {
     console.log(values);
     //root: api call
-    setLoading(true);
 
-    authRepo.login(values.email, values.password).then((res) => {
-      localStorage.setItem("Token", res.data.data.access_token);
-          router.push("/");
-          setLoading(false);
-          showNotification({
-            color: "green",
-            icon: <IconCheck />,
-            title: "Login Success",
-            message: "Welcome to Dashboard",
-          });
-        })
-        .catch((err) => {
-          setLoading(false);
-          showNotification({
-            color: "red",
-            icon: <IconX />,
-            title: "Invalid credentials",
-            message: "Please check your email and password",
-          });
-    })
-
-    // http
-    //   .post("/auth/login", values)
-    //   .then((res) => {
-    //     localStorage.setItem("Token", res.data.data.access_token);
-    //     router.push("/");
-    //     setLoading(false);
-    //     showNotification({
-    //       color: "green",
-    //       icon: <IconCheck />,
-    //       title: "Login Success",
-    //       message: "Welcome to Dashboard",
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     setLoading(false);
-    //     showNotification({
-    //       color: "red",
-    //       icon: <IconX />,
-    //       title: "Invalid credentials",
-    //       message: "Please check your email and password",
-    //     });
-    //   });
+    mutate(values);
   };
 
   const { handleBlur, handleSubmit, handleChange, errors, values } = useFormik({
@@ -88,7 +71,7 @@ const LoginPage = () => {
             <Input.Wrapper withAsterisk label="Email" error={errors.email}>
               <Input
                 name={"email"}
-                disabled={loading}
+                disabled={isLoading}
                 onChange={handleChange}
                 value={values.email}
                 onBlur={handleBlur}
@@ -104,7 +87,7 @@ const LoginPage = () => {
             >
               <Input
                 name={"password"}
-                disabled={loading}
+                disabled={isLoading}
                 onChange={handleChange}
                 value={values.password}
                 onBlur={handleBlur}
@@ -114,7 +97,7 @@ const LoginPage = () => {
               />
             </Input.Wrapper>
             <Space h={"sm"} />
-            <Button loading={loading} type="submit">
+            <Button loading={isLoading} type="submit">
               Login
             </Button>
           </form>
