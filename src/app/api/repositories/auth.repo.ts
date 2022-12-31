@@ -1,5 +1,6 @@
-import {AxiosInstance} from "axios"
+import {AxiosInstance, AxiosResponse} from "axios"
 import http from "./http";
+import {AuthenticatorUser} from    "../models/user.model"
 
 class AuthApiRepo{
 
@@ -13,7 +14,7 @@ class AuthApiRepo{
         return this.http.post("/auth/login", payLoad)
     }
 
-    me = () => {
+    me = (): Promise<AxiosResponse<{data: AuthenticatorUser}>> => {
         return this.http.get("/users/me")
     }
 
