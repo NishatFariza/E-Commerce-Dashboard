@@ -1,4 +1,5 @@
 import axios from "axios";
+import { config } from "process";
 
 
 const http = axios.create({
@@ -8,5 +9,23 @@ const http = axios.create({
     }
 })
 
+
+http.interceptors.request.use((config) => {
+
+ const token = localStorage.getItem("Token")
+    let authHeader = {}
+    if (token) {
+        authHeader = {Authorization: `Barer ${token}`}
+    }
+    return {
+        ...config,
+        headers: {
+            ...config.headers,
+            Authorization: token ? `Bearer ${token}` : "",
+       }
+    };
+}, (error) => {
+    return Promise.reject(error);
+});
 
 export default http;

@@ -15,11 +15,16 @@ class AuthApiRepo{
     }
 
     me = (): Promise<AxiosResponse<{data: AuthenticatorUser}>> => {
-        return this.http.get("/users/me")
+        return this.http.get("/users/me", {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("Token")}`
+            }
+        })
     }
 
 }
 
+//============payload===========
 export interface LoginPayload {
     email: string,
     password: string,
