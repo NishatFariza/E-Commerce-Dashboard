@@ -1,12 +1,20 @@
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, useState } from "react";
+import { AuthenticatorUser } from "@/app/api/models/user.model"
 
-
-export const AppContext = React.createContext({});
-
-const AppContextProvider: React.FC<PropsWithChildren> = ({children}) => {
-  return (
-      <AppContext.Provider value={{count: 5, x: 10}}>{ children}</AppContext.Provider>
-  )
+interface IAppContext{
+  user?: AuthenticatorUser,
+  setUser: (user: AuthenticatorUser) => void;
 }
 
-export default AppContextProvider
+export const AppContext = React.createContext<IAppContext>({} as IAppContext);
+
+const AppContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
+  const [user, setUser] = useState<AuthenticatorUser>();
+  return (
+    <AppContext.Provider value={{ user, setUser }}>
+      {children}
+    </AppContext.Provider>
+  );
+};
+
+export default AppContextProvider;

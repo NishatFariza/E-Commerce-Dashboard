@@ -19,7 +19,13 @@ import AppContextProvider from "@/context/AppContextProvider";
 
 // axios.defaults.baseURL = "http://104.251.211.125:8055";
 
-export const queryClient = new QueryClient();
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+    },
+  },
+});
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
