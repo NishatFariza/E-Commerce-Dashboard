@@ -1,7 +1,11 @@
+import { AppContext } from "@/context/AppContextProvider";
 import { Avatar, Menu } from "@mantine/core";
 import { IconLogout, IconSettings } from "@tabler/icons";
+import  { useContext } from "react";
 
 const HeaderUserMenu = () => {
+
+ const context = useContext(AppContext)
   return (
     <Menu shadow="md" width={200}>
       <Menu.Target>
@@ -13,7 +17,8 @@ const HeaderUserMenu = () => {
       </Menu.Target>
 
       <Menu.Dropdown>
-        <Menu.Label>Application</Menu.Label>
+        {/* @ts-ignore */}
+        <Menu.Label>Application { context.x}</Menu.Label>
         <Menu.Item icon={<IconSettings size={14} />}>Settings</Menu.Item>
         <Menu.Item icon={<IconLogout size={14} />}>Logout</Menu.Item>
       </Menu.Dropdown>

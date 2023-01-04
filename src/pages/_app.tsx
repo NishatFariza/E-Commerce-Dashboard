@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import authRepo from "@/app/api/repositories/auth.repo";
 import AppWrapper from "@/components/AppWrapper";
+import AppContextProvider from "@/context/AppContextProvider";
 
 // axios.defaults.baseURL = "http://104.251.211.125:8055";
 
@@ -22,7 +23,6 @@ export const queryClient = new QueryClient();
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
-
 
   return (
     <>
@@ -44,9 +44,11 @@ export default function App(props: AppProps) {
           }}
         >
           <NotificationsProvider position="top-right">
-            <AppWrapper>
-              <Component {...pageProps} />
-            </AppWrapper>
+            <AppContextProvider>
+              <AppWrapper>
+                <Component {...pageProps} />
+              </AppWrapper>
+            </AppContextProvider>
           </NotificationsProvider>
         </MantineProvider>
       </QueryClientProvider>
