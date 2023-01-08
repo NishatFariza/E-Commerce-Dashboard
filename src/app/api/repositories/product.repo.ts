@@ -1,13 +1,16 @@
+import { AxiosInstance } from "axios";
+
 export class ProductApiRepo {
-    //property => variable
-    //method => function
+     private http: AxiosInstance;
 
-    private productId = 1;
-
-    constructor(productId: number) {
-        this.productId = productId;
+     constructor( http: AxiosInstance) { 
+        this.http = http
     }
-    getProduct() { }
+    getProduct() { 
+        return this.http.get("/items/products")
+    }
+
+
     getProductById(id: string){}
 }
 

@@ -13,6 +13,7 @@ const AppWrapper: React.FC<PropsWithChildren> = ({ children }) => {
         setUser(res.data.data)
     },
     onError: () => {
+      localStorage.removeItem("Token")
       router.push("/auth/login");
     },
   });
