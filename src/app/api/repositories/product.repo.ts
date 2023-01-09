@@ -1,4 +1,5 @@
 import { AxiosInstance } from "axios";
+import http from "./http";
 
 export class ProductApiRepo {
      private http: AxiosInstance;
@@ -6,13 +7,16 @@ export class ProductApiRepo {
      constructor( http: AxiosInstance) { 
         this.http = http
     }
-    getProduct() { 
-        return this.http.get("/items/products")
+    getProducts(params: CommonPaginationQuery): Promise<any> { 
+        return this.http.get("/items/products", {params: params})
     }
-
 
     getProductById(id: string){}
 }
 
-const product = new ProductApiRepo(5)
+const productApiRepo = new ProductApiRepo(http)
 
+interface CommonPaginationQuery {
+    limit: number,
+    page: number,
+}
