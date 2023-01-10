@@ -1,8 +1,8 @@
 import React, { PropsWithChildren, useState } from "react";
-import { AuthenticatorUser } from "@/app/api/models/user.model"
+import { AuthenticatorUser } from "@/app/api/models/User.model";
 
-interface IAppContext{
-  user?: AuthenticatorUser,
+interface IAppContext {
+  user?: AuthenticatorUser;
   setUser: (user: AuthenticatorUser) => void;
 }
 

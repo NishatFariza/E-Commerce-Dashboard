@@ -1,6 +1,6 @@
 import {AxiosInstance, AxiosResponse} from "axios"
 import http from "./http";
-import {AuthenticatorUser} from    "../models/user.model"
+import {AuthenticatorUser} from    "../models/User.model"
 
 class AuthApiRepo{
 
