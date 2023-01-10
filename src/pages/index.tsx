@@ -1,6 +1,6 @@
 import productRepo from "@/app/api/repositories/product.repo";
 import AdminLayout from "@/components/AdminLayout";
-import { Button, Paper, Space, Table, Title } from "@mantine/core";
+import { Button, Paper, Space, Table, Title, Image } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -35,8 +35,16 @@ export default function Home() {
                 <td>{product.id}</td>
                 <td>{product.title}</td>
                 <td>{product.price}</td>
-                <td>{product.cover_image}</td>
-                <td className="flex gap-2">
+                <td>
+                  <Image
+                    src={`http://104.251.211.125:8055/assets/${product.cover_image}?width=60`}
+                    radius={"sm"}
+                    alt={product.title}
+                   
+                    
+                  />
+                </td>
+                <td className="flex gap-2 items-center justify-center ">
                   <Button>Edit</Button>
 
                   <Button color={"red.5"}>Action</Button>
