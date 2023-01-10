@@ -1,12 +1,14 @@
 import AdminLayout from '@/components/AdminLayout';
-import { Button } from '@mantine/core';
+import { Button, Title } from '@mantine/core';
 
 
 export default function Home() {
   return (
     <AdminLayout>
-      <h1>Hello</h1>
-      <Button className=''>Indego</Button>
+      <div className='flex justify-between items-center'>
+        <Title order={3} color={'dark.4'}>Products</Title>
+        <Button> Add new</Button>
+      </div>
     </AdminLayout>
   );
 }

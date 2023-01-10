@@ -15,7 +15,7 @@ export class ProductApiRepo {
     getProductById(id: string){}
 }
 
-const productApiRepo = new ProductApiRepo(http)
+export default new ProductApiRepo(http)
 
 interface CommonPaginationQuery {
     limit: number,
