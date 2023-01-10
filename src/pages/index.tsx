@@ -1,7 +1,14 @@
+import productRepo from "@/app/api/repositories/product.repo";
 import AdminLayout from "@/components/AdminLayout";
 import { Button, Paper, Space, Table, Title } from "@mantine/core";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 export default function Home() {
+  const { isLoading, data } = useQuery(["products"], () => {
+    return productRepo.getProducts({ limit: 10, page: 1 });
+  });
+
   return (
     <AdminLayout>
       <div className="flex justify-between items-center">
@@ -10,6 +17,7 @@ export default function Home() {
         </Title>
         <Button> Add new</Button>
       </div>
+      {/* <pre>{JSON.stringify(data?.data.data, null, 2)}</pre> */}
       <Paper p={"md"}>
         <Table withBorder withColumnBorders>
           <thead>
@@ -22,17 +30,19 @@ export default function Home() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>#fgfjhjf</td>
-              <td>Product Title</td>
-              <td>$10</td>
-              <td>Image</td>
-              <td className="flex gap-2">
-                <Button>Edit</Button>
-                
-                <Button color={"red.5"}>Action</Button>
-              </td>
-            </tr>
+            {data?.data.data.map((product) => (
+              <tr key={product.id}>
+                <td>{product.id}</td>
+                <td>{product.title}</td>
+                <td>{product.price}</td>
+                <td>{product.cover_image}</td>
+                <td className="flex gap-2">
+                  <Button>Edit</Button>
+
+                  <Button color={"red.5"}>Action</Button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </Table>
       </Paper>

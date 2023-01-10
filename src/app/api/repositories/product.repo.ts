@@ -1,4 +1,4 @@
-import { AxiosInstance } from "axios";
+import { AxiosInstance, AxiosResponse } from "axios";
 import { Product } from "../models/Product.model";
 import http from "./http";
 
@@ -8,7 +8,7 @@ export class ProductApiRepo {
      constructor( http: AxiosInstance) { 
         this.http = http
     }
-    getProducts(params: CommonPaginationQuery): Promise<{data: Product[]}> { 
+    getProducts(params: CommonPaginationQuery): Promise<AxiosResponse<{data: Product[]}>> { 
         return this.http.get("/items/products", {params: params})
     }
 
